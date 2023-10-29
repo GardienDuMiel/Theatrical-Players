@@ -28,27 +28,28 @@ public class HtmlStatementPrinter {
 
       // Calcul du montant en fonction du type de la pièce de théâtre
       switch (play.type) {
-        case "tragedy":
+        case TRAGEDY:
           thisAmount = 400.0;
           if (perf.audience > 30) {
             thisAmount += 10.0 * (perf.audience - 30);
           }
           break;
-        case "comedy":
+        case COMEDY:
           thisAmount = 300.0;
           if (perf.audience > 20) {
             thisAmount += 100.0 + 5.0 * (perf.audience - 20);
           }
           thisAmount += 3.0 * perf.audience;
           break;
+        // Ajoute d'autres cas au besoin
         default:
-          throw new Error("unknown type: ${play.type}");
+          throw new Error("unknown type: " + play.type);
       }
 
       // Ajout des crédits de volume
       volumeCredits += Math.max(perf.audience - 30, 0);
       // Ajout de crédits supplémentaires pour chaque tranche de dix spectateurs pour les comédies
-      if ("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
+      if (PlayType.COMEDY.equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
 
       // Utilisation de StringBuilder pour concaténer la ligne résultat HTML
       result.append(String.format("<p>%s: %s (%s seats)</p>\n", play.name, frmt.format(thisAmount), perf.audience));

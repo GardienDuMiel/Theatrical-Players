@@ -4,5 +4,7 @@ package theatricalplays;
 public enum PlayType {
   TRAGEDY,
   COMEDY,
+  HISTORY,
+  PASTORAL
   // Ajoute d'autres types au besoin
 }
